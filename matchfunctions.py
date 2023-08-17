@@ -5,8 +5,6 @@ import openai
 
 t = 0
 
-openai.api_key = "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"
-
 conexion = mysql.connector.connect(
     host="localhost",
     user="root",
