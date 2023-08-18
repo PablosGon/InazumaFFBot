@@ -68,5 +68,4 @@ def present_team(idteam):
         response = client.create_tweet(text="¡" + p[1] + ", " + position + " de " + afinidad + "!\n\n" + supertecnicas, media_ids=[p[7]], in_reply_to_tweet_id=id_reply)
         id_reply = response.data["id"]
 
-
-present_team(1)
+present_team(14)

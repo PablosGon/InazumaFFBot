@@ -43,4 +43,4 @@ def upload_media_team(idteam):
     conexion.commit()
 
 
-upload_media_team(1)
+upload_media_team(14)
