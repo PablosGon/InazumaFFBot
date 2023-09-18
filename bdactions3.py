@@ -41,6 +41,3 @@ def upload_media_team(idteam):
 
         cursor.execute("UPDATE player SET idmedia = " + str(media.media_id) + " WHERE idplayer = " + str(p[0]))
     conexion.commit()
-
-
-upload_media_team(14)

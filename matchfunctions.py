@@ -105,9 +105,14 @@ def saqueInicial(dl1, dl2, match):
     n = random.random()
     if n < 0.5:
         saqueid = dl1[0][0]
-    else: saqueid = dl2[0][0]
+        saqueid2 = dl2[0][0]
+    else:
+        saqueid = dl2[0][0]
+        saqueid2 = dl1[0][0]
     cursor.execute("UPDATE inazumadb.match SET idplayerwithball = " + str(saqueid) + " WHERE idmatch = " + str(match[0]))
     conexion.commit()
+
+    return saqueid2
 
 # COMIENZA EL PARTIDO
 
@@ -116,8 +121,8 @@ def comenzarPartido(match):
     conexion.commit()
     print("¡COMIENZA EL PARTIDO!\n")
 
-def refrescarPartido():
-    cursor.execute("SELECT * FROM inazumadb.match WHERE idmatch = (SELECT MAX(idmatch) FROM inazumadb.match)")
+def refrescarPartido(match):
+    cursor.execute("SELECT * FROM inazumadb.match WHERE idmatch = " + str(match[0]))
     match = cursor.fetchone()
     return match
 
@@ -284,6 +289,7 @@ def regatear(player, match, idt1, idt2, lf):
 
     if lf < 4:
         linea = lf + 1
+    else: linea = lf
     
     return linea
 
@@ -352,7 +358,7 @@ def getNPT(player):
 
 def decide(match, idt1, idt2, lf):
 
-    cursor.execute("SELECT * FROM player WHERE idplayer = (SELECT idplayerwithball FROM inazumadb.match WHERE idmatch = (SELECT MAX(idmatch) FROM inazumadb.match))")
+    cursor.execute("SELECT * FROM player WHERE idplayer = (SELECT idplayerwithball FROM inazumadb.match WHERE idmatch = " + str(match[0]) + ")")
     player = cursor.fetchone()
 
     shootmatrix = [[0, 0, 0, 0, 0],
